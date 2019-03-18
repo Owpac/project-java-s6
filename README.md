@@ -1,6 +1,6 @@
 # Introduction:
 
-Litle School Project in Java.
+Little School Project in Java.
 
 # Guidelines:
 
