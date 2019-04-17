@@ -1,12 +1,12 @@
-# Introduction:
+# Introduction
 
 Little School Project in Java.
 
-# Guidelines:
+# Guidelines
 
 Choose your langage:
 - [French](https://github.com/Owpac/students-evaluations/blob/master/docs/guidelines_fr.md)
-- [Enchlish](https://github.com/Owpac/students-evaluations/blob/master/docs/guidelines_en.md)
+- [English](https://github.com/Owpac/students-evaluations/blob/master/docs/guidelines_en.md)
 
 # License
 
