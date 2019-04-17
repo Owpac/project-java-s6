@@ -1,11 +1,15 @@
 import java.util.*;
 
+/**
+ * Immutable object
+ */
 public class Student extends Human
 {
     private final static int NB_EVALUATIONS = 10;
 
-    private Promotion promotion;
+    private String promotionName;
     private Date birthDate;
+
     private int id;
     private List<Evaluation> evaluations;
     private Set<Professor> correctors;
@@ -15,12 +19,16 @@ public class Student extends Human
         this.birthDate = birthDate;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.promotionName = promotion.getName();
 
         evaluations = new ArrayList<>();
         correctors = new HashSet<>();
 
         // Ajout de l'élève à sa promotion
         promotion.addEleve(this);
+
+        // Get the student id. If he's the 3d student in Promotion 2021, his ID should be 20210003.
+        id = Integer.parseInt(promotion.getName()) * 10_000 + promotion.getSize();
     }
 
     public double mean() throws IllegalStateException
@@ -69,12 +77,16 @@ public class Student extends Human
             gradeDisplay.append(evaluation.getTopic()).append(":").append(evaluation.getGrade()).append(", ");
         }
 
-        String display =
-            super.toString() + ", id:" + id + "\n"
-                + "Grades: " + gradeDisplay + "\n";
+        String display
+            = super.toString() + ", id:" + id + "\n"
+            + "Promotion: " + promotionName + "\n"
+            + "Birth date: " + birthDate + "\n"
+            + "Grades: " + gradeDisplay + "\n";
+
         if (this.evaluations.size() > 0)
         {
-            display += "Mean: " + mean() + "\n"
+            display
+                += "Mean: " + mean() + "\n"
                 + "Median: " + median() + "\n"
                 + "Correctors: " + correctors;
         }
@@ -116,6 +128,17 @@ public class Student extends Human
     public boolean wasEvaluated()
     {
         return evaluations.size() > 0;
+    }
+
+
+    public int getId()
+    {
+        return id;
+    }
+
+    @Override
+    public Student clone() throws CloneNotSupportedException {
+        return (Student) super.clone();
     }
 }
 

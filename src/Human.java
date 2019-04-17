@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public abstract class Human
+public abstract class Human implements Cloneable
 {
     protected String firstName;
     protected String lastName;
@@ -41,5 +41,10 @@ public abstract class Human
     public int hashCode()
     {
         return Objects.hash(firstName, lastName);
+    }
+
+    @Override
+    public Human clone() throws CloneNotSupportedException {
+        return (Human) super.clone();
     }
 }

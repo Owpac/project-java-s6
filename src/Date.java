@@ -3,10 +3,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Objects;
 
-class Date
+final class Date implements Cloneable
 {
-    private LocalDate date;
-    private String display;
+    final private LocalDate date;
+    final private String display;
 
     /**
      * @param year  The year of birth.

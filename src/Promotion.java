@@ -3,7 +3,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Promotion
+public class Promotion implements Cloneable
 {
     private Set<Student> students;
     private Set<Student> immutableStudents;
@@ -21,9 +21,44 @@ public class Promotion
         students.add(student);
     }
 
+    /**
+     * Search for a student in the promotion, with the given ID
+     *
+     * @param id the id of the student
+     * @return the student, or {@code null} if none were found
+     */
+    public Student search(int id)
+    {
+        for (Student student : students)
+        {
+            if (student.getId() == id)
+            {
+                try
+                {
+                    return student.clone();
+                }
+                catch (CloneNotSupportedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
     public String getName()
     {
         return name;
+    }
+
+    /**
+     * Get the size of the promotion: the number of students in it.
+     *
+     * @return the number of students in the promotion
+     */
+    public int getSize()
+    {
+        return students.size();
     }
 
     public void setName(String name)
@@ -71,5 +106,10 @@ public class Promotion
         }
         display.append("]");
         return display.toString();
+    }
+
+    @Override
+    public Promotion clone() throws CloneNotSupportedException {
+        return (Promotion) super.clone();
     }
 }

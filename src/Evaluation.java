@@ -5,14 +5,14 @@ public class Evaluation
     private String topic;
     private double grade;
 
-    private Student student;
+    private int studentID;
     private Professor professor;
 
     public Evaluation(String topic, double grade, Student student, Professor professor)
     {
         this.topic = topic;
         this.grade = grade;
-        this.student = student;
+        this.studentID = student.getId();
         this.professor = professor;
 
         student.addEvaluation(this);
@@ -26,7 +26,7 @@ public class Evaluation
     @Override
     public String toString()
     {
-        return "(" + professor + " " + student + " " + topic + " " + grade;
+        return "(" + professor + " " + professor.search(studentID) + " " + topic + " " + grade;
     }
 
     public String getTopic()
