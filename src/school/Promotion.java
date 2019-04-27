@@ -1,19 +1,21 @@
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
+package school;
+
+import com.sun.source.util.Trees;
+import jdk.nashorn.api.tree.Tree;
+
+import java.rmi.StubNotFoundException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Promotion implements Cloneable
 {
-    private Set<Student> students;
-    private Set<Student> immutableStudents;
+    private List<Student> students;
     private String name;
 
     public Promotion(String name)
     {
         this.name = name;
-        students = new TreeSet<>(StudentEvaluation.GRADE_MEAN_ORDER);
-        immutableStudents = Collections.unmodifiableSet(students);
+        students = new LinkedList<>();
     }
 
     public void addEleve(Student student)
@@ -66,9 +68,53 @@ public class Promotion implements Cloneable
         this.name = name;
     }
 
-    public Set<Student> getStudents()
+    public List<Student> getStudents()
     {
-        return immutableStudents;
+        return students;
+    }
+
+    /**
+     * Sort the students with the given comparator
+     *
+     * @param comparator the comparator used to sort students
+     */
+    private void sortBy(Comparator<Student> comparator)
+    {
+        this.students.sort(comparator);
+    }
+
+    /**
+     * Sort the students by their mean
+     *
+     * @param ascending if true, then the order will be ascending, else descending
+     */
+    public void sortByMean(boolean ascending)
+    {
+        if (ascending)
+        {
+            sortBy(StudentEvaluation.GRADE_MEAN_ORDER_ASCENDING);
+        }
+        else
+        {
+            sortBy(StudentEvaluation.GRADE_MEAN_ORDER_DESCENDING);
+        }
+    }
+
+    /**
+     * Sort the students by their median
+     *
+     * @param ascending if true, then the order will be ascending, else descending
+     */
+    public void sortByMedian(boolean ascending)
+    {
+        if (ascending)
+        {
+            sortBy(StudentEvaluation.GRADE_MEDIAN_ORDER_ASCENDING);
+        }
+        else
+        {
+            sortBy(StudentEvaluation.GRADE_MEDIAN_ORDER_DESCENDING);
+        }
     }
 
     @Override
@@ -96,20 +142,23 @@ public class Promotion implements Cloneable
     @Override
     public String toString()
     {
-        StringBuilder display = new StringBuilder("Promotion " + name + "\n");
-        display.append("Students:\n[\n");
+        String display = "Promotion " + name + "\n";
+        display += "Students:\n[\n\t";
+
+        List<String> studentsDisplay = new ArrayList<>();
         for (Student student : students)
         {
-            display.append("\t")
-                   .append(student.toString().replace("\n", "\n\t"))
-                   .append(",\n\n");
+            studentsDisplay.add(student.toString().replace("\n", "\n\t"));
         }
-        display.append("]");
-        return display.toString();
+        display += String.join(",\n\n\t", studentsDisplay);
+        display += "\n]";
+
+        return display;
     }
 
     @Override
-    public Promotion clone() throws CloneNotSupportedException {
+    public Promotion clone() throws CloneNotSupportedException
+    {
         return (Promotion) super.clone();
     }
 }

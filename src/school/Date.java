@@ -1,9 +1,11 @@
+package school;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Objects;
 
-final class Date implements Cloneable
+public final class Date implements Cloneable
 {
     final private LocalDate date;
     final private String display;
@@ -14,7 +16,7 @@ final class Date implements Cloneable
      *              Else, use Calendar.MONTH_NAME.
      * @param day   The day of birth. Starts with 1.
      */
-    Date(int year, int month, int day)
+    public Date(int year, int month, int day)
     {
         date = LocalDate.of(year, month + 1, day);
         display = date.format(DateTimeFormatter.ofPattern("dd LLLL yyyy").withLocale(Locale.US));
