@@ -1,3 +1,5 @@
+package school;
+
 import java.util.*;
 
 /**
@@ -14,7 +16,7 @@ public class Student extends Human
     private List<Evaluation> evaluations;
     private Set<Professor> correctors;
 
-    Student(String firstName, String lastName, Promotion promotion, Date birthDate)
+    public Student(String firstName, String lastName, Promotion promotion, Date birthDate)
     {
         this.birthDate = birthDate;
         this.firstName = firstName;
@@ -63,6 +65,28 @@ public class Student extends Human
         correctors.add(evaluation.getProfessor());
     }
 
+    /**
+     * Change the grade of the given evaluation
+     *
+     * @param evaluationNumber the number of the evaluation to change
+     * @param newGrade         the new grade of the evaluation
+     * @throws EvaluationDoesNotExistException thrown if the given evaluation does not exist
+     */
+    void setGrade(int evaluationNumber, int newGrade) throws EvaluationDoesNotExistException
+    {
+        try
+        {
+            this.evaluations.get(evaluationNumber).setGrade(newGrade);
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            throw new EvaluationDoesNotExistException("Student " + this.firstName + " " +
+                                                          this.lastName + " only has " + this.evaluations.size()
+                                                          + " evaluations. Can't set the grade of evaluation number " +
+                                                          evaluationNumber + ".");
+        }
+    }
+
     public Set<Professor> getCorrectors()
     {
         return correctors;
@@ -78,7 +102,8 @@ public class Student extends Human
         }
 
         String display
-            = super.toString() + ", id:" + id + "\n"
+            = super.toString() + "\n"
+            + "id: " + id + "\n"
             + "Promotion: " + promotionName + "\n"
             + "Birth date: " + birthDate + "\n"
             + "Grades: " + gradeDisplay + "\n";
@@ -137,15 +162,21 @@ public class Student extends Human
     }
 
     @Override
-    public Student clone() throws CloneNotSupportedException {
+    public Student clone() throws CloneNotSupportedException
+    {
         return (Student) super.clone();
     }
 }
 
 interface StudentEvaluation
 {
-    Comparator<Student> GRADE_MEAN_ORDER =
+    Comparator<Student> GRADE_MEAN_ORDER_ASCENDING =
         Comparator.comparingDouble(student -> student.wasEvaluated() ? student.mean() : 0);
-    Comparator<Student> GRADE_MEDIAN_ORDER =
+    Comparator<Student> GRADE_MEAN_ORDER_DESCENDING =
+        Comparator.comparingDouble(student -> student.wasEvaluated() ? -student.mean() : 0);
+
+    Comparator<Student> GRADE_MEDIAN_ORDER_ASCENDING =
         Comparator.comparingDouble(student -> student.wasEvaluated() ? student.median() : 0);
+    Comparator<Student> GRADE_MEDIAN_ORDER_DESCENDING =
+        Comparator.comparingDouble(student -> student.wasEvaluated() ? -student.median() : 0);
 }

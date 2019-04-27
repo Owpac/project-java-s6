@@ -1,3 +1,5 @@
+package school;
+
 import java.util.Comparator;
 
 public class Evaluation
@@ -5,14 +7,14 @@ public class Evaluation
     private String topic;
     private double grade;
 
-    private int studentID;
+    private Student student;
     private Professor professor;
 
     public Evaluation(String topic, double grade, Student student, Professor professor)
     {
         this.topic = topic;
         this.grade = grade;
-        this.studentID = student.getId();
+        this.student = student;
         this.professor = professor;
 
         student.addEvaluation(this);
@@ -26,7 +28,7 @@ public class Evaluation
     @Override
     public String toString()
     {
-        return "(" + professor + " " + professor.search(studentID) + " " + topic + " " + grade;
+        return "(" + professor + " " + student + " " + topic + " " + grade;
     }
 
     public String getTopic()
@@ -37,6 +39,11 @@ public class Evaluation
     public Professor getProfessor()
     {
         return professor;
+    }
+
+    public void setGrade(int newGrade)
+    {
+        this.grade = newGrade;
     }
 }
 

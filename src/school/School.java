@@ -1,13 +1,16 @@
+package school;
+
 import java.awt.*;
 import java.util.Collection;
 import java.util.HashSet;
+
 import java.util.Set;
 
 public class School
 {
-    Set<Promotion> promotions;
+    private Set<Promotion> promotions;
 
-    School(Collection<Promotion> promotions)
+    public School(Collection<Promotion> promotions)
     {
         this.promotions = new HashSet<>(promotions);
     }

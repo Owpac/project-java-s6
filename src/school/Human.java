@@ -1,3 +1,5 @@
+package school;
+
 import java.util.Objects;
 
 public abstract class Human implements Cloneable {
@@ -12,9 +14,14 @@ public abstract class Human implements Cloneable {
         return firstName;
     }
 
+    public String getFullName() {
+        return this.firstName + ' ' + this.lastName;
+    }
+
     @Override
+
     public String toString() {
-        return "(" + firstName + ", " + lastName + ")";
+        return this.getFullName();
     }
 
     @Override
