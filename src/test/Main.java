@@ -9,6 +9,7 @@ public class Main
     public static void main(String[] args)
     {
         JFrame jFrame = new JFrame("Menu");
+        jFrame.setLocationRelativeTo( null );
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setLayout(new GridLayout(2, 2));
 
