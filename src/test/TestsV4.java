@@ -23,15 +23,15 @@ public class TestsV4 extends JFrame implements ActionListener {
 
         this.promotions = loadPromotions();
 
-        this.students = loadStudents(promotions);
+        this.students = loadStudents( promotions );
 
-        loadEvaluations(this.students);
+        loadEvaluations( this.students );
 
         //Attribute's initiaisation
         this.buttons = new ArrayList<>();
 
         //Frame's configuration
-        BaseFrame.frame(this, "Menu", 400, true);
+        BaseFrame.frame( this, "Menu", 400, true );
 
         //If we close this frame, we close all the program
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -64,17 +64,15 @@ public class TestsV4 extends JFrame implements ActionListener {
         if (source == this.buttons.get( 0 )) {
             new AddPromotionFrame( this.promotions );
         } else if (source == this.buttons.get( 1 )) {
-
+            new AddStudentFrame( this.promotions, this.students );
         } else if (source == this.buttons.get( 2 )) {
-
+            new AddEvaluationFrame( this.students );
         } else if (source == this.buttons.get( 3 )) {
-
+            new ListPromotionFrame( this.promotions );
         } else if (source == this.buttons.get( 4 )) {
-
+            new ListStudentFrame( this.students );
         } else if (source == this.buttons.get( 5 )) {
-
-        } else if (source == this.buttons.get( 6 )) {
-
+            new ListEvaluationFrame( this.students );
         }
     }
 }
