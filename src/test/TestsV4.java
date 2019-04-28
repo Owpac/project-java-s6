@@ -27,7 +27,7 @@ public class TestsV4 extends JFrame implements ActionListener {
 
         loadEvaluations( this.students );
 
-        //Attribute's initiaisation
+        //Attribute's initialisation
         this.buttons = new ArrayList<>();
 
         //Frame's configuration
@@ -36,7 +36,7 @@ public class TestsV4 extends JFrame implements ActionListener {
         //If we close this frame, we close all the program
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 
-        //Panel's connfiguration
+        //Panel's configuration
         JPanel panel = new JPanel();
         panel.setLayout( new GridLayout( 3, 2 ) );
 

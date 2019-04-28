@@ -54,7 +54,7 @@ public class AddPromotionFrame extends JFrame implements ActionListener {
                 promotions.put( this.nameInput.getText(), new Promotion( this.nameInput.getText() ) );
                 savePromotions( promotions );
 
-                JOptionPane.showMessageDialog( null, "Correctly added promotion '" + this.nameInput.getText() + "' !", "Success", JOptionPane.INFORMATION_MESSAGE );
+                JOptionPane.showMessageDialog( null, "Successfully added promotion '" + this.nameInput.getText() + "' !", "Success", JOptionPane.INFORMATION_MESSAGE );
             } else {
                 JOptionPane.showMessageDialog( null, "Failed to add promotion '" + this.nameInput.getText() + "', name not correct.", "Error", JOptionPane.ERROR_MESSAGE );
             }

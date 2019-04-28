@@ -107,7 +107,7 @@ public class AddStudentFrame extends JFrame implements ActionListener {
                             students.put( student.getId(), student );
                             saveStudentsAndEvaluations( students );
 
-                            JOptionPane.showMessageDialog( null, "Correctly added student '" + this.firstnameInput.getText() + "' !", "Success", JOptionPane.INFORMATION_MESSAGE );
+                            JOptionPane.showMessageDialog( null, "Successfully added student '" + this.firstnameInput.getText() + "' !", "Success", JOptionPane.INFORMATION_MESSAGE );
 
                         } catch (NumberFormatException error) {
                             JOptionPane.showMessageDialog( null, "Error : incorrect input.", "Error", JOptionPane.ERROR_MESSAGE );

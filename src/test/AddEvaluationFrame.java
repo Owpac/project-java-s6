@@ -96,7 +96,7 @@ public class AddEvaluationFrame extends JFrame implements ActionListener {
                                     new Evaluation( this.topicInput.getText(), grade, this.students.get( studentId ), new Professor( this.professorFirstNameInput.getText(), this.professorLastNameInput.getText() ) );
                                     saveStudentsAndEvaluations( this.students );
 
-                                    JOptionPane.showMessageDialog( null, "Correctly added evaluation !", "Success", JOptionPane.INFORMATION_MESSAGE );
+                                    JOptionPane.showMessageDialog( null, "Successfully added evaluation !", "Success", JOptionPane.INFORMATION_MESSAGE );
 
                                 } else {
                                     JOptionPane.showMessageDialog( null, "Failed to add evaluation, professor last name not correct.", "Error", JOptionPane.ERROR_MESSAGE );
