@@ -38,7 +38,7 @@ public class TestsV4 extends JFrame implements ActionListener {
 
         //Panel's configuration
         JPanel panel = new JPanel();
-        panel.setLayout( new GridLayout( 3, 2 ) );
+        panel.setLayout( new GridLayout( 4, 2 ) );
 
         this.buttons.add( new JButton( "Add a promotion" ) );
         this.buttons.add( new JButton( "Add a student" ) );
@@ -46,6 +46,8 @@ public class TestsV4 extends JFrame implements ActionListener {
         this.buttons.add( new JButton( "List promotions" ) );
         this.buttons.add( new JButton( "List students" ) );
         this.buttons.add( new JButton( "List evaluations" ) );
+        this.buttons.add( new JButton( "Display student report" ) );
+        this.buttons.add( new JButton( "Display promotion statistics" ) );
 
         //Button's configuration
         for (JButton button : this.buttons) {
@@ -73,6 +75,10 @@ public class TestsV4 extends JFrame implements ActionListener {
             new ListStudentFrame( this.students );
         } else if (source == this.buttons.get( 5 )) {
             new ListEvaluationFrame( this.students );
+        } else if (source == this.buttons.get( 6 )) {
+            new DisplayStudentReport( this.promotions, this.students );
+        } else if (source == this.buttons.get( 7 )) {
+            new DisplayPromotionStatistics( this.promotions );
         }
     }
 }
