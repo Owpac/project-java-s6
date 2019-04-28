@@ -71,6 +71,60 @@ public class UtilityMethods
         return means;
     }
 
+    public static Map<String, Double> getMediansByTopic(Student student)
+    {
+        Map<String, List<Double>> gradesByTopic = new HashMap<>();
+
+        getGradesByTopic(gradesByTopic, student);
+
+        return getMediansFromGrades(gradesByTopic);
+    }
+
+    public static Map<String, Double> getMediansByTopic(Promotion promotion)
+    {
+        Map<String, List<Double>> gradesByTopic = new HashMap<>();
+
+        for (Student student : promotion.getStudents())
+        {
+            getGradesByTopic(gradesByTopic, student);
+        }
+
+        return getMediansFromGrades(gradesByTopic);
+    }
+
+    private static Map<String, Double> getMediansFromGrades(Map<String, List<Double>> gradesByTopic)
+    {
+        Map<String, Double> medians = new HashMap<>();
+
+        for (Map.Entry<String, List<Double>> entry : gradesByTopic.entrySet())
+        {
+            String topic = entry.getKey();
+            List<Double> grades = entry.getValue();
+
+            grades.sort(Double::compareTo);
+            Double median = grades.get(grades.size() / 2);
+            medians.put(topic, median);
+        }
+
+        return medians;
+    }
+
+    private static void getGradesByTopic(Map<String, List<Double>> gradesByTopic, Student student)
+    {
+        for (Evaluation evaluation : student.getEvaluations())
+        {
+            String topic = evaluation.getTopic();
+            Double grade = evaluation.getGrade();
+
+            if (!gradesByTopic.containsKey(topic))
+            {
+                gradesByTopic.put(topic, new ArrayList<>());
+            }
+
+            List<Double> currentGrades = gradesByTopic.get(topic);
+            currentGrades.add(grade);
+        }
+    }
 
     public static void searchStudent(int studentID, Promotion promotion)
     {
