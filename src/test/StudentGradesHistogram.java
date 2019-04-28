@@ -22,8 +22,8 @@ public class StudentGradesHistogram
             dataset.addValue(grade, "Grades", topic);
         }
 
-        String xaxis = "grades";
-        String yaxis = "number of students";
+        String xaxis = "topic";
+        String yaxis = "grades";
         PlotOrientation orientation = PlotOrientation.VERTICAL;
         boolean show = false;
         boolean toolTips = false;
