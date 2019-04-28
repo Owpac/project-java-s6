@@ -16,8 +16,8 @@ public class GradesHistogram
         HistogramDataset dataset = new HistogramDataset();
         dataset.setType(HistogramType.FREQUENCY);
         dataset.addSeries("Histogram", grades, 20, 0.0, 20.0);
-        String xaxis = "number";
-        String yaxis = "value";
+        String xaxis = "grades";
+        String yaxis = "number of students";
         PlotOrientation orientation = PlotOrientation.VERTICAL;
         boolean show = false;
         boolean toolTips = false;
