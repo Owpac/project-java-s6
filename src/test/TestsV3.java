@@ -38,32 +38,9 @@ public class TestsV3
 
         Student student = students.get(studentID);
         Promotion promotion = promotions.get(student.getPromotionName());
+        displayStudentReport(promotions, student);
 
-        Map<String, Double> studentMeansByTopic = getMeansByTopic(student);
-        Map<String, Double> studentMediansByTopic = getMediansByTopic(student);
-
-        Map<String, Double> promotionMeansByTopic = getMeansByTopic(promotion);
-        Map<String, Double> promotionMediansByTopic = getMediansByTopic(promotion);
-
-        JTableBasic table = new JTableBasic("Grades report for " + student.getFullName());
-        List<Object[]> rows = new ArrayList<>();
-
-        // Create the table
-        for (String topic : studentMeansByTopic.keySet())
-        {
-            // For each topic, get the student mean, the student median, the promotion mean & median
-            Double studentMean = studentMeansByTopic.get(topic);
-            Double studentMedian = studentMediansByTopic.get(topic);
-            Double promotionMean = promotionMeansByTopic.get(topic);
-            Double promotionMedian = promotionMediansByTopic.get(topic);
-
-            rows.add(new Object[]{topic, studentMean, studentMedian, promotionMean, promotionMedian});
-        }
-
-        table.setHeaders(new String[]{"Topic", "Mean", "Median", "Promotion Mean", "Promotion Median"});
-        table.setData(rows.toArray(new Object[0][]));
-
-        table.pack();
-        table.setVisible(true);
+        displayPromotionMean(promotion);
+        displayPromotionMedian(promotion);
     }
 }
