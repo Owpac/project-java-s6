@@ -2,57 +2,47 @@ package school;
 
 import java.util.Objects;
 
-public abstract class Human implements Cloneable
-{
+public abstract class Human implements Cloneable {
     protected String firstName;
     protected String lastName;
 
-    public String getLastName()
-    {
+    public String getLastName() {
         return lastName;
     }
 
-    public String getFirstName()
-    {
+    public String getFirstName() {
         return firstName;
     }
 
-    public String getFullName()
-    {
+    public String getFullName() {
         return this.firstName + ' ' + this.lastName;
     }
 
     @Override
-    public String toString()
-    {
+
+    public String toString() {
         return this.getFullName();
     }
 
     @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
-        {
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass())
-        {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         Human human = (Human) o;
-        return Objects.equals(firstName, human.firstName) &&
-            Objects.equals(lastName, human.lastName);
+        return Objects.equals( firstName, human.firstName ) && Objects.equals( lastName, human.lastName );
     }
 
     @Override
-    public int hashCode()
-    {
-        return Objects.hash(firstName, lastName);
+    public int hashCode() {
+        return Objects.hash( firstName, lastName );
     }
 
     @Override
-    public Human clone() throws CloneNotSupportedException
-    {
+    public Human clone() throws CloneNotSupportedException {
         return (Human) super.clone();
     }
 }
