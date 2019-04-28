@@ -2,14 +2,13 @@ package test;
 
 import school.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
-import static test.TestsMethods.displaySeparatorLine;
-import static test.TestsMethods.displayTitle;
+import static test.FilesMethods.*;
+import static test.UtilityMethods.*;
+import static test.InputMethods.*;
+import static test.DisplayMethods.*;
 
 public class TestsV2
 {
@@ -17,52 +16,75 @@ public class TestsV2
     {
         displayTitle("Reading data from files.");
 
-        Map<String, Promotion> promotions = new HashMap<>();
-        Map<Integer, Student> students = new HashMap<>();
+        // Load data
+        System.out.println("Loading promotions");
+        Map<String, Promotion> promotions = loadPromotions();
 
-        Scanner promotionsScanner = new Scanner(new File("src/test/data/promotions.csv"));
-        Scanner studentsScanner = new Scanner(new File("src/test/data/students.csv"));
-        Scanner evaluationsScanner = new Scanner(new File("src/test/data/evaluations.csv"));
+        System.out.println("Loading students");
+        Map<Integer, Student> students = loadStudents(promotions);
 
-        final String delimiters = ", |,|\\r?\\n";
-        promotionsScanner.useDelimiter(delimiters);
-        studentsScanner.useDelimiter(delimiters);
-        evaluationsScanner.useDelimiter(delimiters);
+        System.out.println("Loading evaluations");
+        loadEvaluations(students);
 
-        System.out.println("Reading promotions.");
-        while (promotionsScanner.hasNext())
+        for (Promotion promotion : promotions.values())
         {
-            String promotionName = promotionsScanner.next();
-            promotions.put(promotionName, new Promotion(promotionName));
-
-            System.out.println("New promotion: " + promotionName);
+            displayTitle("Starting tests on promotion " + promotion.getName());
+            testPromotion(promotion);
         }
 
-        System.out.println("\nReading students.");
-        while (studentsScanner.hasNext())
+        menu(promotions, students);
+    }
+
+    public static void menu(Map<String, Promotion> promotions, Map<Integer, Student> students)
+    {
+        while (true)
         {
-            String firstName = studentsScanner.next();
-            String lastName = studentsScanner.next();
-            Promotion promotion = promotions.get(studentsScanner.next());
-            Date birthDate = new Date(studentsScanner.nextInt(), studentsScanner.nextInt(), studentsScanner.nextInt());
+            boolean correctChoice = false;
+            int choice = 0;
 
-            Student student = new Student(firstName, lastName, promotion, birthDate);
-            students.put(student.getId(), student);
+            while (!correctChoice)
+            {
+                System.out.println("\nWhat do you want to do?");
+                System.out.println("0. Leave the application");
+                System.out.println("1. Add a promotion");
+                System.out.println("2. Add a student");
+                System.out.println("3. Add an evaluation");
+                System.out.println("4. List promotions");
+                System.out.println("5. List students");
+                System.out.println("6. List evaluations");
 
-            System.out.println("New student: " + student.getFullName());
-        }
+                choice = askInt();
 
-        System.out.println("\nReading evaluations.");
-        while (evaluationsScanner.hasNext())
-        {
-            String topic = evaluationsScanner.next();
-            String g = evaluationsScanner.next();
-            double grade = evaluationsScanner.nextDouble();
-            Student student = students.get(evaluationsScanner.nextInt());
-            Professor professor = new Professor(evaluationsScanner.next(), evaluationsScanner.next());
+                correctChoice = 0 <= choice && choice <= 6;
+                if (!correctChoice)
+                {
+                    System.out.println("This choice does not exist.");
+                }
+            }
 
-            Evaluation eval = new Evaluation(topic, grade, student, professor);
-            System.out.println("New evaluation: " + eval);
+            switch (choice)
+            {
+                case 0:
+                    return;
+                case 1:
+                    addPromotion(promotions);
+                    break;
+                case 2:
+                    addStudent(promotions, students);
+                    break;
+                case 3:
+                    addEvaluation(students);
+                    break;
+                case 4:
+                    displayPromotions(promotions);
+                    break;
+                case 5:
+                    displayStudents(students);
+                    break;
+                case 6:
+                    displayEvaluations(students);
+                    break;
+            }
         }
     }
 }

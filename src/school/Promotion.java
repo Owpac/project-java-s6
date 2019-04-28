@@ -143,12 +143,17 @@ public class Promotion implements Cloneable
     public String toString()
     {
         String display = "Promotion " + name + "\n";
-        display += "Students:\n[\n\t";
+
+        display += "Students: [";
+
+        if (students.size() < 1) {
+            return display + "]";
+        }
 
         List<String> studentsDisplay = new ArrayList<>();
         for (Student student : students)
         {
-            studentsDisplay.add(student.toString().replace("\n", "\n\t"));
+            studentsDisplay.add("\n\t" + student.toString().replace("\n", "\n\t"));
         }
         display += String.join(",\n\n\t", studentsDisplay);
         display += "\n]";

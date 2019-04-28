@@ -28,7 +28,10 @@ public class Evaluation
     @Override
     public String toString()
     {
-        return "(" + professor + " " + student + " " + topic + " " + grade;
+        String display = student.getFullName();
+        display += " - " + topic + ": " + grade + ".";
+        display += " Corrector: " + professor.getFullName();
+        return display;
     }
 
     public String getTopic()

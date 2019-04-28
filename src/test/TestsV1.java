@@ -4,7 +4,7 @@ import school.*;
 
 import java.util.Calendar;
 
-import static test.TestsMethods.*;
+import static test.UtilityMethods.*;
 
 public class TestsV1
 {
@@ -47,25 +47,6 @@ public class TestsV1
         new Evaluation("Communication", 16.5, celine, boissier);
         new Evaluation("Communication", 16.0, celine, boissier);
 
-        displayPromotion("Unsorted promotion:", promotion2021);
-
-        promotion2021.sortByMean(true);
-        displayPromotion("Promotion sorted by mean - ascending:", promotion2021);
-
-        promotion2021.sortByMean(false);
-        displayPromotion("Promotion sorted by mean - descending:", promotion2021);
-
-        promotion2021.sortByMedian(true);
-        displayPromotion("Promotion sorted by median - ascending:", promotion2021);
-
-        promotion2021.sortByMedian(false);
-        displayPromotion("Promotion sorted by median - descending:", promotion2021);
-
-        displayTitle("Students search:");
-
-        searchStudent(20210003, promotion2021);
-        searchStudent(20210008, promotion2021);
-        searchStudent(20210001, promotion2021);
-        searchStudent(20210888, promotion2021);
+        testPromotion(promotion2021);
     }
 }

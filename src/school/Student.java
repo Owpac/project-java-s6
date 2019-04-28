@@ -7,14 +7,15 @@ import java.util.*;
  */
 public class Student extends Human
 {
-    private final static int NB_EVALUATIONS = 10;
-
     private String promotionName;
     private Date birthDate;
 
     private int id;
+
     private List<Evaluation> evaluations;
     private Set<Professor> correctors;
+
+    private static Set<Integer> ids = new HashSet<>();
 
     public Student(String firstName, String lastName, Promotion promotion, Date birthDate)
     {
@@ -31,6 +32,31 @@ public class Student extends Human
 
         // Get the student id. If he's the 3d student in Promotion 2021, his ID should be 20210003.
         id = Integer.parseInt(promotion.getName()) * 10_000 + promotion.getSize();
+
+        // Else, if this ID already exists, give a new id which is the max + 1
+        if (ids.contains(id))
+        {
+            id = Collections.max(ids) + 1;
+        }
+
+        ids.add(id);
+    }
+
+    public Student(int studentID, String firstName, String lastName, Promotion promotion, Date birthDate)
+    {
+        this.birthDate = birthDate;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.promotionName = promotion.getName();
+
+        evaluations = new ArrayList<>();
+        correctors = new HashSet<>();
+
+        // Ajout de l'élève à sa promotion
+        promotion.addEleve(this);
+
+        id = studentID;
+        ids.add(id);
     }
 
     public double mean() throws IllegalStateException
@@ -95,23 +121,23 @@ public class Student extends Human
     @Override
     public String toString()
     {
-        StringBuilder gradeDisplay = new StringBuilder();
-        for (Evaluation evaluation : evaluations)
-        {
-            gradeDisplay.append(evaluation.getTopic()).append(":").append(evaluation.getGrade()).append(", ");
-        }
-
         String display
             = super.toString() + "\n"
             + "id: " + id + "\n"
             + "Promotion: " + promotionName + "\n"
-            + "Birth date: " + birthDate + "\n"
-            + "Grades: " + gradeDisplay + "\n";
+            + "Birth date: " + birthDate;
 
         if (this.evaluations.size() > 0)
         {
+            StringBuilder gradeDisplay = new StringBuilder();
+            for (Evaluation evaluation : evaluations)
+            {
+                gradeDisplay.append(evaluation.getTopic()).append(":").append(evaluation.getGrade()).append(", ");
+            }
+
             display
-                += "Mean: " + mean() + "\n"
+                += "\nGrades: " + gradeDisplay + "\n"
+                + "Mean: " + mean() + "\n"
                 + "Median: " + median() + "\n"
                 + "Correctors: " + correctors;
         }
@@ -155,10 +181,24 @@ public class Student extends Human
         return evaluations.size() > 0;
     }
 
-
     public int getId()
     {
         return id;
+    }
+
+    public List<Evaluation> getEvaluations()
+    {
+        return evaluations;
+    }
+
+    public String getPromotionName()
+    {
+        return promotionName;
+    }
+
+    public Date getBirthDate()
+    {
+        return birthDate;
     }
 
     @Override

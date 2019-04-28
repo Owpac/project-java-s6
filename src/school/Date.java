@@ -7,6 +7,10 @@ import java.util.Objects;
 
 public final class Date implements Cloneable
 {
+    final int year;
+    final int month;
+    final int day;
+
     final private LocalDate date;
     final private String display;
 
@@ -18,8 +22,27 @@ public final class Date implements Cloneable
      */
     public Date(int year, int month, int day)
     {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+
         date = LocalDate.of(year, month + 1, day);
         display = date.format(DateTimeFormatter.ofPattern("dd LLLL yyyy").withLocale(Locale.US));
+    }
+
+    public int getYear()
+    {
+        return year;
+    }
+
+    public int getMonth()
+    {
+        return month;
+    }
+
+    public int getDay()
+    {
+        return day;
     }
 
     @Override
