@@ -65,7 +65,6 @@ public class AddStudentFrame extends JFrame implements ActionListener {
         this.yearInput = new JTextField( 10 );
         row6.add( this.yearInput );
 
-        //Second row configuration
         JPanel row7 = new JPanel();
         this.addButton = new JButton( "Add" );
         this.addButton.addActionListener( this );
@@ -111,7 +110,7 @@ public class AddStudentFrame extends JFrame implements ActionListener {
                             JOptionPane.showMessageDialog( null, "Correctly added student '" + this.firstnameInput.getText() + "' !", "Success", JOptionPane.INFORMATION_MESSAGE );
 
                         } catch (NumberFormatException error) {
-                            JOptionPane.showMessageDialog( null, "Error : Incorrect input.", "Error", JOptionPane.ERROR_MESSAGE );
+                            JOptionPane.showMessageDialog( null, "Error : incorrect input.", "Error", JOptionPane.ERROR_MESSAGE );
                         }
 
                     } else {

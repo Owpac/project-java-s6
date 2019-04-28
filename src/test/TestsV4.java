@@ -66,7 +66,7 @@ public class TestsV4 extends JFrame implements ActionListener {
         } else if (source == this.buttons.get( 1 )) {
             new AddStudentFrame( this.promotions, this.students );
         } else if (source == this.buttons.get( 2 )) {
-
+            new AddEvaluationFrame( this.students );
         } else if (source == this.buttons.get( 3 )) {
 
         } else if (source == this.buttons.get( 4 )) {
