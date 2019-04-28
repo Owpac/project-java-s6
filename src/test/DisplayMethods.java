@@ -101,7 +101,7 @@ public class DisplayMethods
                 allMeans.add(student.mean());
             }
         }
-        new GradesHistogram("Promotion " + promotion.getName() + " means", allMeans.stream().mapToDouble(d -> d).toArray());
+        new PromotionGradesHistogram("Promotion " + promotion.getName() + " means", allMeans.stream().mapToDouble(d -> d).toArray());
     }
 
     public static void displayPromotionMedian(Promotion promotion)
@@ -115,6 +115,6 @@ public class DisplayMethods
                 allMedians.add(student.median());
             }
         }
-        new GradesHistogram("Promotion " + promotion.getName() + " medians", allMedians.stream().mapToDouble(d -> d).toArray());
+        new PromotionGradesHistogram("Promotion " + promotion.getName() + " medians", allMedians.stream().mapToDouble(d -> d).toArray());
     }
 }

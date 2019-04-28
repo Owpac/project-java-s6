@@ -1,28 +1,34 @@
 package test;
 
-import java.io.*;
-import java.util.Random;
-
-import org.jfree.chart.*;
-import org.jfree.data.statistics.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.*;
+import java.util.Map;
 
-public class GradesHistogram
+public class StudentGradesHistogram
 {
-    public GradesHistogram(String title, double[] grades)
+    StudentGradesHistogram(String title, Map<String, Double> grades)
     {
-        HistogramDataset dataset = new HistogramDataset();
-        dataset.setType(HistogramType.FREQUENCY);
-        dataset.addSeries("Histogram", grades, 20, 0.0, 20.0);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        for (Map.Entry<String, Double> entry : grades.entrySet())
+        {
+            String topic = entry.getKey();
+            double grade = entry.getValue();
+            dataset.addValue(grade, "Grades", topic);
+        }
+
         String xaxis = "grades";
         String yaxis = "number of students";
         PlotOrientation orientation = PlotOrientation.VERTICAL;
         boolean show = false;
         boolean toolTips = false;
         boolean urls = false;
-        JFreeChart chart = ChartFactory.createHistogram(title, xaxis, yaxis,
+        JFreeChart chart = ChartFactory.createBarChart(title, xaxis, yaxis,
                                                         dataset, orientation, show, toolTips, urls);
         int width = 500;
         int height = 300;

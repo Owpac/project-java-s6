@@ -42,5 +42,8 @@ public class TestsV3
 
         displayPromotionMean(promotion);
         displayPromotionMedian(promotion);
+
+        new StudentGradesHistogram(student.getFullName() + " means per topic", getMeansByTopic(student));
+        new StudentGradesHistogram(student.getFullName() + " medians per topic", getMediansByTopic(student));
     }
 }

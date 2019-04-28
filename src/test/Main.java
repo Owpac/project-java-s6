@@ -60,13 +60,12 @@ public class Main
             jFrame.setVisible(false);
             try
             {
-                new TestsV4();
+                new TestsV4(jFrame);
             }
             catch (FileNotFoundException ex)
             {
                 ex.printStackTrace();
             }
-            jFrame.setVisible(true);
         });
         jFrame.add(button4);
 
