@@ -18,14 +18,14 @@ public class JTableBasic extends JFrame
 
     public JTableBasic(String title)
     {
-        this("", null, null);
+        this(title, null, null);
     }
 
     public JTableBasic(String title, Object[][] data, String[] headers)
     {
         super();
         setTitle(title);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.data = data;
         this.headers = headers;
     }
